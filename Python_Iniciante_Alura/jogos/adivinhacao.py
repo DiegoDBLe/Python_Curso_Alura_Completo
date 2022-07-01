@@ -2,7 +2,6 @@ import random
 
 
 def jogar():
-
     print('*********************************')
     print('Bem Vinda ao jogo de Adivinhação!')
     print('*********************************')
@@ -51,3 +50,7 @@ def jogar():
             pontos_perdidos = abs(numero_secreto - chute)
             pontos = pontos - pontos_perdidos
     print('Fim do Jogo!')
+
+
+if __name__ == '__main__':
+    jogar()
