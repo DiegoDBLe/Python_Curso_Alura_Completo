@@ -18,16 +18,17 @@ def jogar():
 
     while not enforcou and not acertou:
 
+        print(f'{tentativa + 1}° Tentativa!')
         chute = pede_chute()
 
         if chute in palavra_secreta:
             chute_correto(chute, palavras_acertadas, palavra_secreta)
         else:
             tentativa += 1
-            if tentativa == len(palavra_secreta):
+            desenha_forca(tentativa)
+            if tentativa == 7:
                 enforcou = True
-                imprime_msg_perdeu()
-
+                imprime_msg_perdeu(palavra_secreta)
         if '_' not in palavras_acertadas:
             acertou = True
             if acertou:
@@ -78,14 +79,93 @@ def chute_correto(chute, palavras_acertadas, palavra_secreta):
 
 def imprime_msg_vencedor():
     print(f'PARABÉNS!! VOCÊ ACERTOU A PALAVRA.')
+    print("       ___________      ")
+    print("      '._==_==_=_.'     ")
+    print("      .-\\:      /-.    ")
+    print("     | (|:.     |) |    ")
+    print("      '-|:.     |-'     ")
+    print("        \\::.    /      ")
+    print("         '::. .'        ")
+    print("           ) (          ")
+    print("         _.' '._        ")
+    print("        '-------'       ")
 
 
-def imprime_msg_perdeu():
+def imprime_msg_perdeu(palavra_secreta):
     print(f'INFELIZMENTE!! VOCÊ NÃO ACERTOU A PALAVRA.')
+
+    print(f"A palavra era {palavra_secreta.upper()}")
+    print("    _______________         ")
+    print("   /               \       ")
+    print("  /                 \      ")
+    print("//                   \/\  ")
+    print("\|   XXXX     XXXX   | /   ")
+    print(" |   XXXX     XXXX   |/     ")
+    print(" |   XXX       XXX   |      ")
+    print(" |                   |      ")
+    print(" \__      XXX      __/     ")
+    print("   |\     XXX     /|       ")
+    print("   | |           | |        ")
+    print("   | I I I I I I I |        ")
+    print("   |  I I I I I I  |        ")
+    print("   \_             _/       ")
+    print("     \_         _/         ")
+    print("       \_______/           ")
 
 
 def imprime_quantidade_letras_palavras(palavra_secreta):
     print(f'Palavra com {len(palavra_secreta)} letras.')
+
+
+def desenha_forca(tentativa):
+    print("  _______     ")
+    print(" |/      |    ")
+
+    if(tentativa == 1):
+        print(" |      (_)   ")
+        print(" |            ")
+        print(" |            ")
+        print(" |            ")
+
+    if(tentativa == 2):
+        print(" |      (_)   ")
+        print(" |      \     ")
+        print(" |            ")
+        print(" |            ")
+
+    if(tentativa == 3):
+        print(" |      (_)   ")
+        print(" |      \|    ")
+        print(" |            ")
+        print(" |            ")
+
+    if(tentativa == 4):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |            ")
+        print(" |            ")
+
+    if(tentativa == 5):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |            ")
+
+    if(tentativa == 6):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |      /     ")
+
+    if (tentativa == 7):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |      / \   ")
+
+    print(" |            ")
+    print("_|___         ")
+    print()
 
 
 if __name__ == '__main__':
