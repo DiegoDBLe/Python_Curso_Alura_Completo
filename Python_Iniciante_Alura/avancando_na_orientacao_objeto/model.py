@@ -20,10 +20,8 @@ class Programa:
     def nome(self, novo_nome):
         self._nome = novo_nome.title()
 
-    def imprime(self):
-        print(f'Nome - {self.nome.title()}\n'
-              f'Ano: {self.ano}\n'
-              f'Likes: {self.like}')
+    def __str__(self):
+        return f'Nome - {self.nome.title()}\nAno: {self.ano}\nLikes: {self.like}'
 
 
 class Filme(Programa):
@@ -32,11 +30,8 @@ class Filme(Programa):
         super().__init__(nome, ano)
         self.duracao = duracao
 
-    def imprime(self):
-        print(f'Nome - {self.nome.title()}\n'
-              f'Ano: {self.ano}\n'
-              f'Duração: {self.duracao}\n'
-              f'Likes: {self.like}')
+    def __str__(self):
+        return f'Nome - {self.nome.title()}\nAno: {self.ano}\nDuração: {self.duracao}\nLikes: {self.like}'
 
 
 class Serie(Programa):
@@ -45,8 +40,5 @@ class Serie(Programa):
         super().__init__(nome, ano)
         self.temporada = temporada
 
-    def imprime(self):
-        print(f'Nome - {self.nome.title()}\n'
-              f'Ano: {self.ano}\n'
-              f'Temporada: {self.temporada}\n'
-              f'Likes: {self.like}')
+    def __str__(self):
+        return f'Nome - {self.nome.title()}\nAno: {self.ano}\nTemporada: {self.temporada}\nLikes: {self.like}'
