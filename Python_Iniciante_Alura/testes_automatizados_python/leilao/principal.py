@@ -1,4 +1,4 @@
-from testes_automatizados_python.leilao.dominio import Leilao, Lance, Usuario
+from testes_automatizados_python.leilao.dominio import Leilao, Lance, Usuario, Avaliador
 
 # Criou o usuario
 gui = Usuario('Gui')
@@ -12,9 +12,15 @@ lance_do_gui = Lance(gui, 150.0)
 leilao = Leilao('Celular')
 
 # Adicionou na lista de lances os lances dos usuarios
-leilao.lances.append(lance_do_gui)
 leilao.lances.append(lance_do_yuri)
+leilao.lances.append(lance_do_gui)
 
 # Percorrer os lances dos usuarios
 for lance in leilao.lances:
     print(f'O usuario {lance.usuario.nome} deu um lance de R$ {lance.valor}')
+
+
+avaliador = Avaliador()
+avaliador.avalia(leilao)
+
+print(f'O menor lance foi de {avaliador.menor_lance} e o maior lance foi de {avaliador.maior_lance}')
