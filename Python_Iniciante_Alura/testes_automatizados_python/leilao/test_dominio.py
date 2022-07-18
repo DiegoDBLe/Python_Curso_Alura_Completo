@@ -22,8 +22,8 @@ class TestAvaliador(TestCase):
     def test_deve_retornar_o_maior_e_o_menor_valor_de_um_lance_quando_adicionados_em_ordem_crescente(self):
 
         # Adicionou na lista de lances os lances dos usuarios
-        self.leilao.lances.append(self.lance_do_yuri)
-        self.leilao.lances.append(self.lance_do_gui)
+        self.leilao.propoe_lance(self.lance_do_yuri)
+        self.leilao.propoe_lance(self.lance_do_gui)
 
         avaliador = Avaliador()
         avaliador.avalia(self.leilao)
@@ -42,8 +42,8 @@ class TestAvaliador(TestCase):
         # Teste de uso ordem decrescente
 
         # Adicionou na lista de lances os lances dos usuarios
-        self.leilao.lances.append(self.lance_do_gui)
-        self.leilao.lances.append(self.lance_do_yuri)
+        self.leilao.propoe_lance(self.lance_do_gui)
+        self.leilao.propoe_lance(self.lance_do_yuri)
 
         avaliador = Avaliador()
         avaliador.avalia(self.leilao)
@@ -60,7 +60,7 @@ class TestAvaliador(TestCase):
     def test_deve_retornar_o_mesmo_valor_para_o_maior_e_menor_lance_quando_leilao_tiver_um_lance(self):
 
         # Adicionar o lance na lista de lancers
-        self.leilao.lances.append(self.lance_do_gui)
+        self.leilao.propoe_lance(self.lance_do_gui)
 
         # Avaliar o lance
         avaliador = Avaliador()
@@ -79,9 +79,9 @@ class TestAvaliador(TestCase):
 
         leilao = Leilao('Celular')
 
-        leilao.lances.append(self.lance_do_gui)
-        leilao.lances.append(self.lance_do_yuri)
-        leilao.lances.append(lance_do_levi)
+        leilao.propoe_lance(self.lance_do_gui)
+        leilao.propoe_lance(self.lance_do_yuri)
+        leilao.propoe_lance(lance_do_levi)
 
         avaliador = Avaliador()
         avaliador.avalia(leilao)
@@ -91,4 +91,5 @@ class TestAvaliador(TestCase):
 
         self.assertEqual(menor_valor_esperado, avaliador.menor_lance)
         self.assertEqual(maior_valor_esperado, avaliador.maior_lance)
+
 
