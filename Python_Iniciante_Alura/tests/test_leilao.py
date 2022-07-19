@@ -8,7 +8,7 @@ class TestLeilao(TestCase):
     def setUp(self):
         # Teste de uso ordem crescente
         # Criou o usuario
-        self.gui = Usuario('Gui')
+        self.gui = Usuario('Gui', 500.0)
 
         # Criou os lances dos usuarios
         self.lance_do_gui = Lance(self.gui, 150.0)
@@ -18,7 +18,7 @@ class TestLeilao(TestCase):
 
     # test_quando_adicionados_em_ordem_crescent_deve_retornar_o_maior_e_o_menor_valor_de_um_lance
     def test_deve_retornar_o_maior_e_o_menor_valor_de_um_lance_quando_adicionados_em_ordem_crescente(self):
-        yuri = Usuario('yuri')
+        yuri = Usuario('yuri', 500.0)
 
         lance_do_yuri = Lance(yuri, 200.0)
 
@@ -37,7 +37,7 @@ class TestLeilao(TestCase):
     # test_quando_adicionados_em_ordem_decrescent_deve_retornar_o_maior_e_o_menor_valor_de_um_lance
     def test_nao_deve_permitir_propor_um_lance_em_ordem_decrescente(self):
         with self.assertRaises(ValueError):
-            yuri = Usuario('Yuri')
+            yuri = Usuario('Yuri', 500.0)
             lance_do_yuri = Lance(yuri, 100.0)
 
             self.leilao.propoe_lance(self.lance_do_gui)
@@ -54,8 +54,8 @@ class TestLeilao(TestCase):
 
     # test_quando_o_leilao_tiver_tres_lances_deve_retornar_o_maior_e_o_menor_valor
     def test_deve_retornar_o_maior_e_o_menor_valor_quando_o_leilao_tiver_tres_lances(self):
-        levi = Usuario('Levi')
-        yuri = Usuario('yuri')
+        levi = Usuario('Levi', 500.0)
+        yuri = Usuario('yuri', 500.0)
 
         lance_do_levi = Lance(levi, 200.0)
         lance_do_yuri = Lance(yuri, 100.0)
@@ -80,7 +80,7 @@ class TestLeilao(TestCase):
 
     # test_quando_o_ultimo_usuario_for_diferente_deve_permitir_propor_um_lance
     def test_caso_ultimo_usuario_for_diferente_deve_permitir_propor_um_lance(self):
-        yuri = Usuario('Yuri')
+        yuri = Usuario('Yuri',500.0)
 
         lance_yuri = Lance(yuri, 200.0)
 
