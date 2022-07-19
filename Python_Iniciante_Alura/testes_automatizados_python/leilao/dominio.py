@@ -16,6 +16,8 @@ class Usuario:
         return self.__nome
 
     def propoe_lance(self, leilao, valor):
+        if valor > self.__carteira:
+            raise ValueError('Saldo insuficiente!! Não pode propor lance.')
         lance = Lance(self, valor)
         leilao.propoe_lance(lance)
         self.__carteira -= valor
