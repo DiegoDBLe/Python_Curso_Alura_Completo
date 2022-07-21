@@ -14,11 +14,15 @@ class Usuario:
         return self.__nome
 
     def propoe_lance(self, leilao, valor):
-        if valor > self.__carteira:
+        if self._lance_eh_valido(valor):
             raise ValueError('Saldo insuficiente!! Não pode propor lance.')
+
         lance = Lance(self, valor)
         leilao.propoe_lance(lance)
         self.__carteira -= valor
+
+    def _lance_eh_valido(self, valor):
+        return valor > self.__carteira
 
 
 class Lance:
@@ -37,11 +41,9 @@ class Leilao:
         self.menor_lance = 0.0
 
     def propoe_lance(self, lance: Lance):
-        # se a lista estiver vazia ou o ultimo usuario q deu o lance na lista for diferente e se o ultimo lance     :
-        # verificar qual o lance maior ou menor
-        # adiciona o lance na lista
-        if not self.__lances or self.__lances[-1] != lance.usuario and lance.valor > self.__lances[-1].valor:
-            if not self.__lances:
+
+        if self._lance_eh_valido(lance):
+            if not self._tem_lances():
                 self.menor_lance = lance.valor
 
             self.maior_lance = lance.valor
@@ -53,3 +55,15 @@ class Leilao:
     @property
     def lances(self):
         return self.__lances[:]
+
+    def _tem_lances(self):
+        return self.__lances
+
+    def _usuario_diferente(self, lance):
+        return self.__lances[-1] != lance.usuario
+
+    def _valor_lance_maior_que_anterior(self, lance):
+        return lance.valor > self.__lances[-1].valor
+
+    def _lance_eh_valido(self, lance):
+        return not self._tem_lances() or self._usuario_diferente(lance) and self._valor_lance_maior_que_anterior(lance)
