@@ -1,5 +1,3 @@
-import sys
-
 
 class Usuario:
 
@@ -35,18 +33,19 @@ class Leilao:
     def __init__(self, descricao):
         self.descricao = descricao
         self.__lances = []
-        self.maior_lance = sys.float_info.min
-        self.menor_lance = sys.float_info.max
+        self.maior_lance = 0.0
+        self.menor_lance = 0.0
 
     def propoe_lance(self, lance: Lance):
         # se a lista estiver vazia ou o ultimo usuario q deu o lance na lista for diferente e se o ultimo lance     :
         # verificar qual o lance maior ou menor
         # adiciona o lance na lista
         if not self.__lances or self.__lances[-1] != lance.usuario and lance.valor > self.__lances[-1].valor:
-            if lance.valor > self.maior_lance:
-                self.maior_lance = lance.valor
-            if lance.valor < self.menor_lance:
+            if not self.__lances:
                 self.menor_lance = lance.valor
+
+            self.maior_lance = lance.valor
+
             self.__lances.append(lance)
         else:
             raise ValueError('O mesmo usuário não pode propor dois lances seguidos')
