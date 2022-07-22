@@ -1,3 +1,5 @@
+from testes_automatizados_python.leilao.excecoes import LanceInvalido
+
 
 class Usuario:
 
@@ -14,15 +16,15 @@ class Usuario:
         return self.__nome
 
     def propoe_lance(self, leilao, valor):
-        if self._lance_eh_valido(valor):
-            raise ValueError('Saldo insuficiente!! Não pode propor lance.')
+        if not self._lance_eh_valido(valor):
+            raise LanceInvalido('Não pode propor lance.')
 
         lance = Lance(self, valor)
         leilao.propoe_lance(lance)
         self.__carteira -= valor
 
     def _lance_eh_valido(self, valor):
-        return valor > self.__carteira
+        return valor <= self.__carteira
 
 
 class Lance:
@@ -50,7 +52,7 @@ class Leilao:
 
             self.__lances.append(lance)
         else:
-            raise ValueError('O mesmo usuário não pode propor dois lances seguidos')
+            raise LanceInvalido('O mesmo usuário não pode propor dois lances seguidos')
 
     @property
     def lances(self):
@@ -60,10 +62,14 @@ class Leilao:
         return self.__lances
 
     def _usuario_diferente(self, lance):
-        return self.__lances[-1] != lance.usuario
+        if self.__lances[-1] != lance.usuario:
+            return True
+        raise LanceInvalido('O mesmo usuário não pode dar dois lances seguidos')
 
     def _valor_lance_maior_que_anterior(self, lance):
-        return lance.valor > self.__lances[-1].valor
+        if lance.valor > self.__lances[-1].valor:
+            return True
+        raise LanceInvalido('O valor do lance deve ser maior que o anterior')
 
     def _lance_eh_valido(self, lance):
         return not self._tem_lances() or self._usuario_diferente(lance) and self._valor_lance_maior_que_anterior(lance)

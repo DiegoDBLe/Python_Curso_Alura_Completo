@@ -4,6 +4,8 @@ import pytest
 
 # um usuario so pode dar um lance ate o valor da carteira, ou seja, se for um valor menor ou igual ao valor da carteira. Nunca pode dar um lance maior do
 # que tem na carteira.
+from testes_automatizados_python.leilao.excecoes import LanceInvalido
+
 
 @pytest.fixture
 def diego():
@@ -34,5 +36,5 @@ def test_deve_permitir_propor_lance_quando_o_valor_eh_igual_ao_valor_da_carteira
 
 
 def test_nao_nao_deve_permitir_propor_lance_com_valor_maior_que_o_da_carteira(diego, leilao):
-    with pytest.raises(ValueError):
+    with pytest.raises(LanceInvalido):
         diego.propoe_lance(leilao, 200.0)
